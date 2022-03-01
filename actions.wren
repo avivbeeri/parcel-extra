@@ -55,7 +55,7 @@ class MoveAction is Action {
         if (occupying.count > 0) {
           solid = solid || occupying.any {|entity| entity.has("solid") }
           target = occupying.any {|entity| entity.has("stats") }
-          collectible = occupying.any {|entity| entity is Collectible }
+          collectible = occupying.any {|entity| entity.has("loot") }
         }
       }
       if (solid || target || collectible) {
