@@ -255,6 +255,3 @@ class SpawnAction is Action {
     return ActionResult.success
   }
 }
-
-
-import "./entity/collectible" for Collectible
