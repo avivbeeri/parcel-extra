@@ -147,7 +147,7 @@ class PickupAction is Action {
     var target = source.pos + _dir
     var occupying = ctx.getEntitiesAtTile(target.x, target.y).where {|entity| entity != source }
     var collectibles = occupying
-    .where{|entity| entity is Collectible }
+    .where{|entity| entity.has("loot") }
 
 
     collectibles.each {|entity|
