@@ -6,10 +6,11 @@ class AttackResult {
 
 
 class AttackType {
-  static melee { "basic" }
+  static direct { "basic" }
+  static stun { "stun" }
 
   static verify(text) {
-    if (text == "basic") {
+    if (text == "basic" || text == "stun") {
       return text
     }
     Fiber.abort("unknown AttackType: %(text)")
@@ -17,7 +18,7 @@ class AttackType {
 }
 
 class Attack {
-  construct new(damage, attackType) {
+  construct new(attackType, damage) {
     _damage = damage
     _attackType = AttackType.verify(attackType)
   }
@@ -25,7 +26,10 @@ class Attack {
   damage { _damage }
   attackType { _attackType }
 
-  static melee(entity) {
-    return Attack.new(entity["stats"].get("atk"), AttackType.melee)
+  static direct(entity) {
+    return Attack.new(AttackType.direct, entity["stats"].get("atk"))
+  }
+  static stun(entity) {
+    return Attack.new(AttackType.stun, 0)
   }
 }
